@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurelio Tech | Flutter & AI Automation Developer | Creative Content Creator</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons: Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- JS Libraries for Animations -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            color: #e5e7eb;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .accent-gradient {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+
+        .typed-cursor {
+            color: #38bdf8;
+            font-size: 2.5rem;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Enhanced Hero Styling */
+        .hero-background {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/><circle cx="200" cy="200" r="100" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="800" r="150" fill="rgba(255,255,255,0.05)"/><polygon fill="rgba(255,255,255,0.08)" points="100,500 300,400 250,600"/><polygon fill="rgba(255,255,255,0.06)" points="700,200 900,300 800,500"/></svg>');
+            background-size: cover;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(1deg); }
+            50% { transform: translateY(-20px) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #fff, #f093fb, #a8edea, #ffeaa7);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease, textShimmer 4s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ONE-TIME LOGO ANIMATION ON LOAD ONLY */
+        .hero-logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            opacity: 0;
+            transform: scale(0.5) rotate(-180deg);
+            animation: logoEntranceOneTime 2s ease-out 0.5s forwards;
+        }
+
+        /* ONE-TIME ENTRANCE ANIMATION */
+        @keyframes logoEntranceOneTime {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-180deg);
+            }
+            60% {
+                opacity: 1;
+                transform: scale(1.1) rotate(10deg);
+            }
+            80% {
+                transform: scale(0.95) rotate(-5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* STATIC RING - Only subtle glow, no rotation */
+        .hero-logo-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffa726, #ab47bc);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            padding: 4px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .hero-logo-ring:hover {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .hero-logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .hero-logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Subtle shimmer effect - only on hover */
+        .hero-logo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-logo:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .logo-image, .logo-fallback {
+            width: 85%;
+            height: 85%;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .logo-fallback {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            font-weight: 500;
+            opacity: 0.95;
+            animation: fadeInUp 1s 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            animation: fadeInUp 1s 0.3s both;
+        }
+
+        .cta-buttons {
+            animation: fadeInUp 1s 0.5s both;
+        }
+
+        .hero-btn {
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .hero-btn:hover::before {
+            left: 100%;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Enhanced sections */
+        .section-card {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Enhanced Email Display - Fixed Overflow Issue */
+        .email-display {
+            font-size: 0.8rem;
+            word-break: break-all;
+            overflow-wrap: break-word;
+            line-height: 1.2;
+            max-width: 100%;
+            padding: 0 0.5rem;
+        }
+
+        /* Contact card responsive fix */
+        .contact-card {
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(135deg, #111827, #1f2937);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            border-radius: 10px;
+            border: 2px solid #111827;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0ea5e9, #6366f1);
+        }
+
+        /* Enhanced stats cards */
+        .stats-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            .hero-description {
+                font-size: 1rem;
+            }
+            .hero-logo-container {
+                width: 150px;
+                height: 150px;
+            }
+            .logo-fallback {
+                font-size: 3rem;
+            }
+            .email-display {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold accent-gradient flex items-center">
+                <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" alt="Aurelio Tech Logo" class="w-8 h-8 mr-2 rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span class="w-8 h-8 mr-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-bold flex items-center justify-center" style="display: none;">AT</span>
+                Aurelio.Tech
+            </a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-gray-300 hover:text-sky-400 transition-colors font-medium">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-sky-400 transition-colors font-medium">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-sky-400 transition-colors font-medium">Projects</a>
+                <a href="#contact" class="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold px-6 py-2 rounded-full transition-all shadow-lg hover:shadow-xl">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden">
+                <i data-lucide="menu" class="text-white w-6 h-6"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-300 hover:text-sky-400">About</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-sky-400">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-300 hover:text-sky-400">Projects</a>
+            <a href="#contact" class="block mt-2 w-full text-center bg-sky-500 hover:bg-sky-600 text-white font-semibold px-4 py-2 rounded-lg">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <!-- Enhanced Hero Section with ONE-TIME ANIMATED LOGO -->
+        <section id="hero" class="hero-background min-h-screen flex flex-col justify-center items-center text-center pt-24">
+            <div class="max-w-5xl relative z-10">
+                <!-- ONE-TIME ANIMATED LOGO - Smooth entrance then stops -->
+                <div class="hero-logo-container">
+                    <div class="hero-logo-ring">
+                        <div class="hero-logo">
+                            <img 
+                                src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" 
+                                alt="Aurelio Tech Logo" 
+                                class="logo-image object-cover"
+                                onload="this.style.opacity=1; this.nextElementSibling.style.display='none';"
+                                style="opacity:0; transition: opacity 0.5s ease;"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                            />
+                            <!-- Enhanced Fallback -->
+                            <div class="logo-fallback" style="display: none;">
+                                AT
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced title with better typography -->
+                <h1 class="hero-title mb-6">
+                    <span class="block">Aurelio Tech</span>
+                </h1>
+
+                <!-- Enhanced subtitle with typing effect -->
+                <p class="hero-subtitle mb-4">Flutter & AI Automation Developer</p>
+
+                <!-- Dynamic typed text with enhanced content -->
+                <div class="text-xl md:text-2xl text-gray-200 font-semibold min-h-[60px] mb-8">
+                    <span id="typed-tagline"></span>
+                </div>
+
+                <!-- Enhanced description -->
+                <p class="hero-description max-w-3xl mx-auto mb-10 text-lg leading-relaxed">
+                    Python Expert | Hardware Specialist | Creative Content Creator | Building the Future with Code & Innovation
+                </p>
+
+                <!-- Enhanced CTA buttons with better styling -->
+                <div class="cta-buttons flex justify-center space-x-6 flex-wrap gap-4 mb-16">
+                    <a href="#projects" class="hero-btn bg-white text-purple-600 shadow-2xl hover:shadow-purple-500/25">
+                        <i data-lucide="code" class="w-5 h-5 mr-2 inline"></i>
+                        View My Work
+                    </a>
+                    <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="hero-btn bg-red-600 text-white shadow-2xl hover:shadow-red-500/25">
+                        <i data-lucide="play" class="w-5 h-5 mr-2 inline"></i>
+                        YouTube Channel
+                    </a>
+                    <a href="https://github.com/CodeWithHarry123" target="_blank" class="hero-btn bg-gray-800 text-white shadow-2xl hover:shadow-gray-800/25">
+                        <i data-lucide="github" class="w-5 h-5 mr-2 inline"></i>
+                        GitHub Profile
+                    </a>
+                </div>
+
+                <!-- Enhanced stats showcase with better animations -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="stats-card rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold text-sky-400 mb-2">8+</div>
+                        <div class="text-sm text-gray-300 font-medium">Live Projects</div>
+                    </div>
+                    <div class="stats-card rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-400 mb-2">100K+</div>
+                        <div class="text-sm text-gray-300 font-medium">YouTube Views</div>
+                    </div>
+                    <div class="stats-card rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold text-pink-400 mb-2">5K+</div>
+                        <div class="text-sm text-gray-300 font-medium">Subscribers</div>
+                    </div>
+                    <div class="stats-card rounded-2xl p-6 text-center">
+                        <div class="text-3xl font-bold text-green-400 mb-2">50+</div>
+                        <div class="text-sm text-gray-300 font-medium">Technologies</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced scroll indicator -->
+            <div class="absolute bottom-10 animate-bounce">
+                <a href="#about" class="text-sky-400 hover:text-sky-300 transition-colors">
+                    <i data-lucide="arrow-down" class="w-8 h-8"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-24 section-card p-16">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-800 mb-4">About Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
+                <p class="text-xl text-purple-600 font-semibold">A Fusion of Code, AI & Innovation</p>
+            </div>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-lg text-gray-700 leading-relaxed space-y-6">
+                        <p>
+                            I'm <strong class="text-purple-600">Aurelio Tech</strong>, a passionate developer and innovator with expertise spanning <strong class="text-sky-600">Flutter development, Python programming, AI automation, and hardware engineering</strong>. My unique combination of technical prowess and creative vision enables me to build solutions that push the boundaries of what's possible.
+                        </p>
+                        <p>
+                            With deep expertise in <strong class="text-indigo-600">advanced Python algorithms, machine learning, robotics, Arduino, and Raspberry Pi</strong>, I create intelligent systems that solve real-world problems. From building Marvel-inspired Jarvis assistants to developing hi-tech security systems for homes and farms, I bring science fiction to reality.
+                        </p>
+                        <p>
+                            My work spans multiple domains: <strong class="text-rose-600">mobile app development, AI automation, hardware programming, and YouTube content creation</strong>. I believe in sharing knowledge freely, which is why I created comprehensive learning resources and maintain an active YouTube channel to help others master these technologies.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-600 to-sky-600 p-8 rounded-3xl text-white shadow-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Core Expertise</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">🚀</span>
+                                <span>Full-Stack Mobile & Web Development</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">🤖</span>
+                                <span>Advanced AI & Machine Learning</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">🐍</span>
+                                <span>Python Expert & Algorithm Specialist</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">🔧</span>
+                                <span>Hardware & Robotics Engineering</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">🎬</span>
+                                <span>Educational Content Creation</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-2xl mr-4">⚡</span>
+                                <span>Automation & Smart Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 section-card p-16">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-800 mb-4">Technical Mastery</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
+                <p class="text-xl text-purple-600 font-semibold">My Developer's Comprehensive Toolkit</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Mobile Development -->
+                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-sky-200 shadow-xl hover:shadow-2xl transition-all">
+                    <div class="flex justify-center mb-6">
+                        <div class="p-4 bg-sky-100 rounded-full skill-icon transition-transform duration-300">
+                           <i data-lucide="smartphone" class="w-12 h-12 text-sky-600"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Mobile Development</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Flutter</span>
+                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Android</span>
+                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Firebase</span>
+                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Kotlin</span>
+                    </div>
+                </div>
+
+                <!-- Python & AI -->
+                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-purple-200 shadow-xl hover:shadow-2xl transition-all">
+                    <div class="flex justify-center mb-6">
+                        <div class="p-4 bg-purple-100 rounded-full skill-icon transition-transform duration-300">
+                           <i data-lucide="brain" class="w-12 h-12 text-purple-600"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Python & AI</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Advanced Python</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Machine Learning</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">AI Algorithms</span>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Neural Networks</span>
+                    </div>
+                </div>
+
+                <!-- Automation & AI Tools -->
+                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-indigo-200 shadow-xl hover:shadow-2xl transition-all">
+                    <div class="flex justify-center mb-6">
+                        <div class="p-4 bg-indigo-100 rounded-full skill-icon transition-transform duration-300">
+                           <i data-lucide="bot" class="w-12 h-12 text-indigo-600"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Automation & AI</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">n8n Workflows</span>
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">TTS Integration</span>
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">Chatbots</span>
+                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">API Integration</span>
+                    </div>
+                </div>
+
+                <!-- Hardware & Robotics -->
+                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-green-200 shadow-xl hover:shadow-2xl transition-all">
+                     <div class="flex justify-center mb-6">
+                        <div class="p-4 bg-green-100 rounded-full skill-icon transition-transform duration-300">
+                           <i data-lucide="cpu" class="w-12 h-12 text-green-600"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Hardware & Robotics</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Arduino</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Raspberry Pi</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">IoT Systems</span>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Sensors</span>
+                    </div>
+                </div>
+
+                <!-- Creative & Design -->
+                 <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-rose-200 shadow-xl hover:shadow-2xl transition-all">
+                     <div class="flex justify-center mb-6">
+                        <div class="p-4 bg-rose-100 rounded-full skill-icon transition-transform duration-300">
+                           <i data-lucide="palette" class="w-12 h-12 text-rose-600"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Creative & Design</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">Blender</span>
+                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">3D Animation</span>
+                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">Video Editing</span>
+                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">UI/UX Design</span>
+                    </div>
+                </div>
+
+                <!-- Web Technologies -->
+                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-amber-200 shadow-xl hover:shadow-2xl transition-all">
+                     <div class="flex justify-center mb-6">
+                        <div class="p-4 bg-amber-100 rounded-full skill-icon transition-transform duration-300">
+                           <i data-lucide="globe" class="w-12 h-12 text-amber-600"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Web Technologies</h3>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">HTML5/CSS3</span>
+                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">JavaScript</span>
+                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">REST APIs</span>
+                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">Cloud Deploy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 section-card p-16">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-800 mb-4">Featured Projects</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
+                <p class="text-xl text-purple-600 font-semibold">Where Innovation Meets Implementation</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                <!-- AurelioX TTS App -->
+                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-sky-100 hover:shadow-2xl transition-all">
+                    <div class="bg-gradient-to-r from-sky-500 to-blue-600 p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">🔊 AurelioX - Advanced TTS</h3>
+                        <p class="text-sky-100">Multi-Language Text-to-Speech Platform</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mb-4">
+                            <p class="font-semibold text-orange-600">Problem:</p>
+                            <p class="text-gray-600">Lack of high-quality, multilingual TTS solutions with advanced customization options.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-semibold text-teal-600">Solution:</p>
+                            <p class="text-gray-600">Developed AurelioX using advanced TTS APIs with voice customization and multi-language support.</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="font-semibold text-green-600">Outcome:</p>
+                            <p class="text-gray-600">Professional-grade TTS platform with natural voice synthesis and batch processing.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">HTML5/CSS3</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">TTS APIs</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Web Audio</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/CodeWithHarry123/TextToSpeechApp" target="_blank" class="flex-1 bg-sky-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-sky-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
+                            </a>
+                            <a href="https://aureliotexttospeech.netlify.app" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced QR Generator -->
+                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-purple-100 hover:shadow-2xl transition-all">
+                    <div class="bg-gradient-to-r from-purple-500 to-indigo-600 p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">📱 Advanced QR Generator</h3>
+                        <p class="text-purple-100">Professional QR Code Creation Platform</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mb-4">
+                            <p class="font-semibold text-orange-600">Problem:</p>
+                            <p class="text-gray-600">Need for advanced QR code generation with logo integration and custom styling.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-semibold text-teal-600">Solution:</p>
+                            <p class="text-gray-600">Built comprehensive QR generator with 50+ presets, gradient colors, and 3D design.</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="font-semibold text-green-600">Outcome:</p>
+                            <p class="text-gray-600">Professional QR generation tool with ultra-HD output and commercial-grade quality.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Canvas API</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">CSS3</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">File Processing</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/CodeWithHarry123/QR_CODE_GENRATOR" target="_blank" class="flex-1 bg-purple-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-purple-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
+                            </a>
+                            <a href="https://codewithharry123.github.io/QR_CODE_GENRATOR/" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WhatsApp Automation Bot -->
+                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-green-100 hover:shadow-2xl transition-all">
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">💬 WhatsApp Automation Bot</h3>
+                        <p class="text-green-100">Intelligent Messaging & Auto-Reply System</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mb-4">
+                            <p class="font-semibold text-orange-600">Problem:</p>
+                            <p class="text-gray-600">Need for automated WhatsApp messaging and intelligent auto-reply functionality.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-semibold text-teal-600">Solution:</p>
+                            <p class="text-gray-600">Developed Node.js bot with QR authentication and smart auto-reply system.</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="font-semibold text-green-600">Outcome:</p>
+                            <p class="text-gray-600">Efficient communication automation saving hours of manual messaging.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Node.js</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">WhatsApp API</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">QR Auth</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Automation</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/CodeWithHarry123/whatsapp-bot" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Giveaway Program -->
+                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-pink-100 hover:shadow-2xl transition-all">
+                    <div class="bg-gradient-to-r from-pink-500 to-rose-600 p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">🎁 Interactive Giveaway Platform</h3>
+                        <p class="text-pink-100">YouTube Channel Growth & Engagement Tool</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mb-4">
+                            <p class="font-semibold text-orange-600">Problem:</p>
+                            <p class="text-gray-600">Need for engaging giveaway system that promotes YouTube channel growth.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-semibold text-teal-600">Solution:</p>
+                            <p class="text-gray-600">Created interactive platform requiring YouTube subscription for participation.</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="font-semibold text-green-600">Outcome:</p>
+                            <p class="text-gray-600">Successful engagement tool that increased channel subscribers significantly.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">HTML5/CSS3</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">YouTube API</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Form Processing</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://github.com/CodeWithHarry123/Giveaway_program" target="_blank" class="flex-1 bg-pink-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-pink-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
+                            </a>
+                            <a href="https://giveawayprogram.netlify.app" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aurelio AI Platform -->
+                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-indigo-100 hover:shadow-2xl transition-all">
+                    <div class="bg-gradient-to-r from-indigo-500 to-blue-600 p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">🤖 Aurelio AI Platform</h3>
+                        <p class="text-indigo-100">YouTube Content Optimization Suite</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mb-4">
+                            <p class="font-semibold text-orange-600">Problem:</p>
+                            <p class="text-gray-600">Content creators need AI-powered assistance for YouTube optimization.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-semibold text-teal-600">Solution:</p>
+                            <p class="text-gray-600">Built AI-integrated platform generating SEO-optimized titles, descriptions, and tags.</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="font-semibold text-green-600">Outcome:</p>
+                            <p class="text-gray-600">Comprehensive AI tool streamlining YouTube content creation process.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">AI Integration</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">NLP</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">SEO</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Content Gen</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://aureliodirect.netlify.app" target="_blank" class="flex-1 bg-indigo-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-indigo-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Access Platform
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flutter Learning Platform -->
+                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-emerald-100 hover:shadow-2xl transition-all">
+                    <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2">📚 Flutter Learning Platform</h3>
+                        <p class="text-emerald-100">Comprehensive Flutter Course Website</p>
+                    </div>
+                    <div class="p-8">
+                        <div class="mb-4">
+                            <p class="font-semibold text-orange-600">Problem:</p>
+                            <p class="text-gray-600">Beginners need structured Flutter tutorials with hands-on examples.</p>
+                        </div>
+                        <div class="mb-4">
+                            <p class="font-semibold text-teal-600">Solution:</p>
+                            <p class="text-gray-600">Developed comprehensive learning platform with module-by-module course structure.</p>
+                        </div>
+                        <div class="mb-6">
+                            <p class="font-semibold text-green-600">Outcome:</p>
+                            <p class="text-gray-600">Educational platform helping hundreds learn Flutter from scratch to advanced.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Educational Design</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Interactive</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Progressive</span>
+                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Documentation</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/" target="_blank" class="flex-1 bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-emerald-600 transition-colors flex items-center justify-center shadow-lg">
+                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Access Course
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- YouTube & Creative Section -->
+        <section id="creative" class="py-24 section-card p-16">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-800 mb-4">Content Creation Excellence</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-500 mx-auto mb-4 rounded-full"></div>
+                <p class="text-xl text-red-600 font-semibold">Aurelio Tech - Knowledge Sharing Platform</p>
+            </div>
+            <div class="max-w-6xl mx-auto bg-gradient-to-r from-red-500 to-red-600 rounded-3xl p-12 text-white shadow-2xl">
+                 <div class="text-center">
+                     <h3 class="text-4xl font-bold mb-6">🔔 Subscribe to Aurelio Tech</h3>
+                     <p class="text-xl leading-relaxed mb-8 max-w-4xl mx-auto">Empowering developers worldwide with free, high-quality programming tutorials and cutting-edge technology insights. Join our growing community of learners and innovators!</p>
+
+                     <!-- YouTube Stats -->
+                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
+                             <div class="text-4xl font-bold mb-2">100K+</div>
+                             <div class="text-sm opacity-90">Total Views</div>
+                         </div>
+                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
+                             <div class="text-4xl font-bold mb-2">5K+</div>
+                             <div class="text-sm opacity-90">Subscribers</div>
+                         </div>
+                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
+                             <div class="text-4xl font-bold mb-2">200+</div>
+                             <div class="text-sm opacity-90">Educational Videos</div>
+                         </div>
+                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
+                             <div class="text-4xl font-bold mb-2">90%</div>
+                             <div class="text-sm opacity-90">Positive Feedback</div>
+                         </div>
+                     </div>
+
+                     <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="inline-flex items-center bg-white text-red-600 font-bold py-4 px-10 rounded-full text-xl hover:bg-gray-100 transition-colors shadow-2xl hover:shadow-3xl transform hover:scale-105">
+                         <i data-lucide="play" class="w-6 h-6 mr-3"></i>
+                         Subscribe Now
+                     </a>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Contact Section - FIXED EMAIL DISPLAY -->
+        <section id="contact" class="py-24 text-center section-card p-16">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold text-gray-800 mb-4">Let's Create Something Revolutionary</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
+                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">Ready to bring your vision to life? Whether it's mobile apps, AI solutions, hardware projects, or educational content - I'm here to make it happen with cutting-edge technology and innovative thinking.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-16">
+                <!-- Email - FIXED DISPLAY -->
+                <div class="contact-card bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="mail" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Email</h3>
+                    <p class="email-display text-gray-600 mb-6">Professional Contact</p>
+                    <a href="mailto:aureliocorporation7@gmail.com" class="inline-flex items-center bg-blue-500 text-white px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors shadow-lg">
+                        <i data-lucide="send" class="w-4 h-4 mr-2"></i>
+                        Send Email
+                    </a>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="contact-card bg-gradient-to-br from-indigo-100 to-indigo-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                    <div class="w-20 h-20 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="linkedin" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">LinkedIn</h3>
+                    <p class="text-gray-600 mb-6">Professional Network</p>
+                    <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" class="inline-flex items-center bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition-colors shadow-lg">
+                        <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i>
+                        Connect
+                    </a>
+                </div>
+
+                <!-- GitHub -->
+                <div class="contact-card bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                    <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="github" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">GitHub</h3>
+                    <p class="text-gray-600 mb-6">Code Repository</p>
+                    <a href="https://github.com/CodeWithHarry123" target="_blank" class="inline-flex items-center bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition-colors shadow-lg">
+                        <i data-lucide="code" class="w-4 h-4 mr-2"></i>
+                        View Code
+                    </a>
+                </div>
+
+                <!-- YouTube -->
+                <div class="contact-card bg-gradient-to-br from-red-100 to-red-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="youtube" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">YouTube</h3>
+                    <p class="text-gray-600 mb-6">Aurelio Tech</p>
+                    <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-colors shadow-lg">
+                        <i data-lucide="play" class="w-4 h-4 mr-2"></i>
+                        Subscribe
+                    </a>
+                </div>
+
+                <!-- Flutter Course -->
+                <div class="contact-card bg-gradient-to-br from-emerald-100 to-emerald-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                    <div class="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="book-open" class="w-10 h-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">Flutter Course</h3>
+                    <p class="text-gray-600 mb-6">Free Learning Platform</p>
+                    <a href="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/" target="_blank" class="inline-flex items-center bg-emerald-600 text-white px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg">
+                        <i data-lucide="graduation-cap" class="w-4 h-4 mr-2"></i>
+                        Start Learning
+                    </a>
+                </div>
+            </div>
+
+            <!-- Why Choose Me Section -->
+            <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-12 rounded-3xl shadow-2xl">
+                <h3 class="text-4xl font-bold text-gray-800 mb-12">Why Partner With Aurelio Tech?</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="text-center">
+                        <div class="text-6xl mb-6">🚀</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Rapid Innovation</h4>
+                        <p class="text-gray-600 leading-relaxed">Lightning-fast development with cutting-edge technologies and proven methodologies.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-6xl mb-6">🧠</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">AI & Hardware Expert</h4>
+                        <p class="text-gray-600 leading-relaxed">Unique combination of software and hardware engineering bridging digital and physical worlds.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-6xl mb-6">🔧</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">End-to-End Solutions</h4>
+                        <p class="text-gray-600 leading-relaxed">From concept to deployment - mobile apps, AI integration, hardware systems, and everything between.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-6xl mb-6">🎯</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Problem Solver</h4>
+                        <p class="text-gray-600 leading-relaxed">Complex challenges require innovative thinking. I specialize in turning impossible ideas into working solutions.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-6xl mb-6">📈</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Scalable Architecture</h4>
+                        <p class="text-gray-600 leading-relaxed">Future-proof solutions built with scalability in mind, ensuring seamless business growth.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-6xl mb-6">🎓</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Knowledge Sharing</h4>
+                        <p class="text-gray-600 leading-relaxed">Not just development - I educate and empower teams, ensuring long-term success and technology transfer.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="flex justify-center items-center mb-6">
+                <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" alt="Aurelio Tech Logo" class="w-16 h-16 rounded-full mr-4 shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="w-16 h-16 rounded-full mr-4 shadow-lg bg-gradient-to-r from-purple-400 to-blue-400 flex items-center justify-center text-2xl font-bold" style="display: none;">AT</div>
+                <h3 class="text-4xl font-bold">Aurelio Tech</h3>
+            </div>
+            <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto">Building tomorrow's technology today - One innovation at a time</p>
+            <div class="flex justify-center space-x-10 mb-10">
+                <a href="https://github.com/CodeWithHarry123" target="_blank" class="text-white/80 hover:text-white transition-colors transform hover:scale-110">
+                    <i data-lucide="github" class="w-10 h-10"></i>
+                </a>
+                <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="text-white/80 hover:text-white transition-colors transform hover:scale-110">
+                    <i data-lucide="youtube" class="w-10 h-10"></i>
+                </a>
+                <a href="mailto:aureliocorporation7@gmail.com" class="text-white/80 hover:text-white transition-colors transform hover:scale-110">
+                    <i data-lucide="mail" class="w-10 h-10"></i>
+                </a>
+            </div>
+            <div class="border-t border-white/20 pt-8">
+                <p class="opacity-70 text-lg">&copy; 2025 Aurelio Tech. Innovating the Future with Code, AI & Hardware.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').classList.add('fade-out');
+            }, 1000);
+        });
+
+        // Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Sticky Header on Scroll
+        const header = document.getElementById('header');
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-2');
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // Enhanced Typed.js Animation for Hero Section Tagline
+        new Typed('#typed-tagline', {
+            strings: [
+                'Python Expert & Algorithm Specialist 🐍',
+                'Hardware & Robotics Engineer 🔧', 
+                'Creative Content Creator & Educator 🎬',
+                'AI Automation Specialist 🤖',
+                'Building the Future with Innovation ⚡'
+            ],
+            typeSpeed: 60,
+            backSpeed: 30,
+            backDelay: 2500,
+            loop: true,
+            smartBackspace: true,
+            showCursor: true,
+            cursorChar: '|'
+        });
+
+        // Enhanced ScrollReveal Animations
+        const sr = ScrollReveal({
+            distance: '80px',
+            duration: 2000,
+            delay: 200,
+            reset: false,
+        });
+
+        sr.reveal('#hero h1, #hero p, #hero .flex', { origin: 'top', interval: 100 });
+        sr.reveal('#about h2, #skills h2, #projects h2, #creative h2, #contact h2', { origin: 'top' });
+        sr.reveal('#about div', { origin: 'bottom' });
+        sr.reveal('.skill-card', { interval: 150, origin: 'bottom' });
+        sr.reveal('.project-card', { interval: 200, origin: 'left' });
+        sr.reveal('#creative .mx-auto', { origin: 'right' });
+        sr.reveal('#contact .grid > div', { interval: 100, origin: 'bottom' });
+
+        // Enhanced scroll animations with Intersection Observer
+        const observeElements = document.querySelectorAll('.skill-card, .project-card, .stats-card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        observeElements.forEach(el => {
+            el.style.transform = 'translateY(50px)';
+            el.style.opacity = '0';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Enhanced smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.querySelector('.hero-background::before');
+            const rate = scrolled * -0.5;
+
+            if (scrolled < window.innerHeight) {
+                document.querySelector('.hero-background').style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Enhanced Console Easter Egg
+        console.log(`
+        🚀 Welcome to Aurelio Tech's ULTRA PROFESSIONAL Portfolio! 
+
+        ✨ Features a ONE-TIME logo animation that plays only on page load!
+
+        🎯 Logo Animation Details:
+        • Starts hidden (scale: 0.5, rotate: -180deg)
+        • Smooth entrance animation (2 seconds)
+        • Ends in perfect position (scale: 1, rotate: 0deg)
+        • No continuous spinning - professional and clean!
+        • Subtle hover effects for interactivity
+
+        🔧 Advanced Technologies Implemented:
+        • Tailwind CSS with custom animations
+        • One-time CSS keyframe animations
+        • ScrollReveal & Typed.js libraries
+        • Intersection Observer API
+        • Responsive design principles
+        • Performance optimizations
+        • Modern web standards
+
+        📧 Ready to collaborate on amazing projects?
+        Contact: aureliocorporation7@gmail.com
+
+        ⭐ Professional portfolio with perfect logo animation timing!
+        🎯 Built for maximum impact and hiring success!
+        `);
+    </script>
+</body>
+</html>
