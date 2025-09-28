@@ -3,138 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurelio Tech | Flutter & AI Automation Developer | Creative Content Creator</title>
+    <title>Aurelio Tech | Flutter & AI Developer | Creative Content Creator</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Icons: Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- JS Libraries for Animations -->
+    <!-- JS Libraries -->
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
     <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-attachment: fixed;
-            color: #e5e7eb;
+        /* CSS Variables for Theme */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-accent: #0ea5e9;
+            --border-color: #e2e8f0;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-accent: linear-gradient(135deg, #0ea5e9, #3b82f6);
         }
 
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-accent: #38bdf8;
+            --border-color: #475569;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
+            --gradient-primary: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --gradient-accent: linear-gradient(135deg, #38bdf8, #06b6d4);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Glass Effect */
         .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="dark"] .glass-effect {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .accent-gradient {
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Theme Toggle Button */
+        .theme-toggle {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .skill-card:hover .skill-icon {
-            transform: scale(1.2) rotate(10deg);
+        .theme-toggle:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
         }
 
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                right: 15px;
+            }
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal {
-            transition: opacity 0.3s ease;
-        }
-
-        .typed-cursor {
-            color: #38bdf8;
-            font-size: 2.5rem;
-            animation: blink 0.7s infinite;
-        }
-
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-
-        /* Enhanced Hero Styling */
-        .hero-background {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: var(--gradient-primary);
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
         }
 
-        .hero-background::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/><circle cx="200" cy="200" r="100" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="800" r="150" fill="rgba(255,255,255,0.05)"/><polygon fill="rgba(255,255,255,0.08)" points="100,500 300,400 250,600"/><polygon fill="rgba(255,255,255,0.06)" points="700,200 900,300 800,500"/></svg>');
-            background-size: cover;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-10px) rotate(1deg); }
-            50% { transform: translateY(-20px) rotate(0deg); }
-            75% { transform: translateY(-10px) rotate(-1deg); }
-        }
-
-        .hero-title {
-            font-size: 4.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #fff, #f093fb, #a8edea, #ffeaa7);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease, textShimmer 4s ease-in-out infinite;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        @keyframes textShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ONE-TIME LOGO ANIMATION ON LOAD ONLY */
-        .hero-logo-container {
+        .hero-content {
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 10;
             position: relative;
-            width: 200px;
-            height: 200px;
+        }
+
+        /* Logo Animation - ONE TIME ONLY */
+        .hero-logo-container {
+            width: 180px;
+            height: 180px;
             margin: 0 auto 2rem;
             opacity: 0;
             transform: scale(0.5) rotate(-180deg);
             animation: logoEntranceOneTime 2s ease-out 0.5s forwards;
         }
 
-        /* ONE-TIME ENTRANCE ANIMATION */
         @keyframes logoEntranceOneTime {
             0% {
                 opacity: 0;
@@ -153,229 +166,711 @@
             }
         }
 
-        /* STATIC RING - Only subtle glow, no rotation */
         .hero-logo-ring {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
             height: 100%;
             border-radius: 50%;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffa726, #ab47bc);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
             padding: 4px;
-            transition: box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .hero-logo-ring:hover {
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 50px rgba(102, 126, 234, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
         }
 
         .hero-logo {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: #0a0a0a;
+            background: var(--bg-primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .hero-logo:hover {
-            transform: scale(1.05);
-        }
-
-        /* Subtle shimmer effect - only on hover */
-        .hero-logo::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.3s ease;
-        }
-
-        .hero-logo:hover::before {
-            transform: translate(-50%, -50%) scale(1);
+            position: relative;
         }
 
         .logo-image, .logo-fallback {
             width: 85%;
             height: 85%;
             border-radius: 50%;
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
+            object-fit: cover;
         }
 
         .logo-fallback {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--gradient-accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 800;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Typography Improvements */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #f0f9ff, #e0f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease 0.2s both;
         }
 
         .hero-subtitle {
-            font-size: 1.8rem;
-            font-weight: 500;
-            opacity: 0.95;
-            animation: fadeInUp 1s 0.2s both;
+            font-size: clamp(1.25rem, 4vw, 2rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 1s ease 0.4s both;
         }
 
         .hero-description {
-            font-size: 1.2rem;
-            opacity: 0.85;
-            animation: fadeInUp 1s 0.3s both;
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease 0.6s both;
         }
 
-        .cta-buttons {
-            animation: fadeInUp 1s 0.5s both;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .hero-btn {
-            padding: 1.2rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        }
-
-        .hero-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .hero-btn:hover::before {
-            left: 100%;
-        }
-
-        .hero-btn:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        /* Enhanced sections */
-        .section-card {
-            background: white;
-            border-radius: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        /* Enhanced Email Display - Fixed Overflow Issue */
-        .email-display {
-            font-size: 0.8rem;
-            word-break: break-all;
-            overflow-wrap: break-word;
-            line-height: 1.2;
-            max-width: 100%;
-            padding: 0 0.5rem;
-        }
-
-        /* Contact card responsive fix */
-        .contact-card {
-            min-height: 280px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .contact-card h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-card p {
-            flex-grow: 1;
-            display: flex;
+        /* Buttons */
+        .btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 12px;
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
         }
 
-        ::-webkit-scrollbar-track {
-            background: linear-gradient(135deg, #111827, #1f2937);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #38bdf8, #818cf8);
-            border-radius: 10px;
-            border: 2px solid #111827;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #0ea5e9, #6366f1);
-        }
-
-        /* Enhanced stats cards */
-        .stats-card {
+        .btn-secondary {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Button Group */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
         }
 
-        .stats-card:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .stat-card:hover {
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
-        /* Responsive Design */
+        .stat-number {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--bg-primary);
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .section-padding {
+            padding: clamp(2rem, 6vw, 4rem);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            color: var(--text-accent);
+            font-weight: 600;
+        }
+
+        .divider {
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-accent);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Grid Layouts */
+        .grid-responsive {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Skill Cards */
+        .skill-card {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--text-accent);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .skill-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--text-accent);
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-section {
+            margin-bottom: 1rem;
+        }
+
+        .project-label {
+            font-weight: 600;
+            color: var(--text-accent);
+            font-size: 0.875rem;
+        }
+
+        .project-text {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .project-tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-tertiary);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* Contact Cards */
+        .contact-card {
+            background: var(--bg-secondary);
+            border-radius: 25px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 280px;
+            justify-content: space-between;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-accent);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-accent);
+            color: white;
+        }
+
+        .contact-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-text {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
+        }
+
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow);
+            padding: 0.75rem 0;
+        }
+
+        [data-theme="dark"] .header.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--text-accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--text-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            padding: 1rem 1.5rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 2px solid var(--border-color);
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .footer-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .footer-desc {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-copy {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.8rem;
-            }
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-            .hero-description {
-                font-size: 1rem;
-            }
             .hero-logo-container {
-                width: 150px;
-                height: 150px;
+                width: 140px;
+                height: 140px;
             }
-            .logo-fallback {
-                font-size: 3rem;
+
+            .nav {
+                display: none;
             }
-            .email-display {
-                font-size: 0.75rem;
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .grid-responsive {
+                gap: 1.5rem;
+            }
+
+            .section-padding {
+                padding: 2rem 1rem;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .project-actions .btn {
+                width: 100%;
+            }
+
+            .contact-card {
+                min-height: 240px;
+                padding: 1.5rem;
+            }
+
+            .footer-social {
+                gap: 1rem;
+            }
+
+            .theme-toggle {
+                bottom: 20px;
+                top: auto;
+                right: 20px;
+                transform: none;
+            }
+
+            .theme-toggle:hover {
+                transform: scale(1.1);
             }
         }
 
-        /* Loading Animation */
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 100px 15px 40px;
+            }
+
+            .section-padding {
+                padding: 1.5rem 1rem;
+            }
+
+            .skill-card,
+            .project-card,
+            .contact-card {
+                margin: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem;
+            }
+
+            .stat-card {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: var(--gradient-primary);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -384,9 +879,9 @@
         }
 
         .loading-spinner {
-            width: 80px;
-            height: 80px;
-            border: 4px solid rgba(255,255,255,0.3);
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
             border-top: 4px solid white;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -401,177 +896,214 @@
             opacity: 0;
             pointer-events: none;
         }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Improved text readability */
+        .text-readable {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .text-readable {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
-<body class="antialiased">
-
-    <!-- Loading Animation -->
+<body>
+    <!-- Loading Screen -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-spinner"></div>
     </div>
 
-    <!-- Header / Navbar -->
-    <header id="header" class="glass-effect fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold accent-gradient flex items-center">
-                <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" alt="Aurelio Tech Logo" class="w-8 h-8 mr-2 rounded-full" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <span class="w-8 h-8 mr-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-sm font-bold flex items-center justify-center" style="display: none;">AT</span>
-                Aurelio.Tech
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i data-lucide="sun" id="themeIcon"></i>
+    </button>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" 
+                     alt="Aurelio Tech Logo" 
+                     class="logo-img"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display: none; width: 40px; height: 40px; background: var(--gradient-accent); border-radius: 50%; align-items: center; justify-content: center; color: white; font-weight: 800;">AT</div>
+                <span>Aurelio.Tech</span>
             </a>
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#about" class="text-gray-300 hover:text-sky-400 transition-colors font-medium">About</a>
-                <a href="#skills" class="text-gray-300 hover:text-sky-400 transition-colors font-medium">Skills</a>
-                <a href="#projects" class="text-gray-300 hover:text-sky-400 transition-colors font-medium">Projects</a>
-                <a href="#contact" class="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-semibold px-6 py-2 rounded-full transition-all shadow-lg hover:shadow-xl">Contact</a>
+
+            <nav class="nav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </nav>
-            <button id="mobile-menu-btn" class="md:hidden">
-                <i data-lucide="menu" class="text-white w-6 h-6"></i>
+
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i data-lucide="menu" width="24" height="24"></i>
             </button>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#about" class="block py-2 text-gray-300 hover:text-sky-400">About</a>
-            <a href="#skills" class="block py-2 text-gray-300 hover:text-sky-400">Skills</a>
-            <a href="#projects" class="block py-2 text-gray-300 hover:text-sky-400">Projects</a>
-            <a href="#contact" class="block mt-2 w-full text-center bg-sky-500 hover:bg-sky-600 text-white font-semibold px-4 py-2 rounded-lg">Contact</a>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <nav class="mobile-nav">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <main class="container mx-auto px-6">
-
-        <!-- Enhanced Hero Section with ONE-TIME ANIMATED LOGO -->
-        <section id="hero" class="hero-background min-h-screen flex flex-col justify-center items-center text-center pt-24">
-            <div class="max-w-5xl relative z-10">
-                <!-- ONE-TIME ANIMATED LOGO - Smooth entrance then stops -->
-                <div class="hero-logo-container">
-                    <div class="hero-logo-ring">
-                        <div class="hero-logo">
-                            <img 
-                                src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" 
-                                alt="Aurelio Tech Logo" 
-                                class="logo-image object-cover"
-                                onload="this.style.opacity=1; this.nextElementSibling.style.display='none';"
-                                style="opacity:0; transition: opacity 0.5s ease;"
-                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                            />
-                            <!-- Enhanced Fallback -->
-                            <div class="logo-fallback" style="display: none;">
-                                AT
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Enhanced title with better typography -->
-                <h1 class="hero-title mb-6">
-                    <span class="block">Aurelio Tech</span>
-                </h1>
-
-                <!-- Enhanced subtitle with typing effect -->
-                <p class="hero-subtitle mb-4">Flutter & AI Automation Developer</p>
-
-                <!-- Dynamic typed text with enhanced content -->
-                <div class="text-xl md:text-2xl text-gray-200 font-semibold min-h-[60px] mb-8">
-                    <span id="typed-tagline"></span>
-                </div>
-
-                <!-- Enhanced description -->
-                <p class="hero-description max-w-3xl mx-auto mb-10 text-lg leading-relaxed">
-                    Python Expert | Hardware Specialist | Creative Content Creator | Building the Future with Code & Innovation
-                </p>
-
-                <!-- Enhanced CTA buttons with better styling -->
-                <div class="cta-buttons flex justify-center space-x-6 flex-wrap gap-4 mb-16">
-                    <a href="#projects" class="hero-btn bg-white text-purple-600 shadow-2xl hover:shadow-purple-500/25">
-                        <i data-lucide="code" class="w-5 h-5 mr-2 inline"></i>
-                        View My Work
-                    </a>
-                    <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="hero-btn bg-red-600 text-white shadow-2xl hover:shadow-red-500/25">
-                        <i data-lucide="play" class="w-5 h-5 mr-2 inline"></i>
-                        YouTube Channel
-                    </a>
-                    <a href="https://github.com/CodeWithHarry123" target="_blank" class="hero-btn bg-gray-800 text-white shadow-2xl hover:shadow-gray-800/25">
-                        <i data-lucide="github" class="w-5 h-5 mr-2 inline"></i>
-                        GitHub Profile
-                    </a>
-                </div>
-
-                <!-- Enhanced stats showcase with better animations -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                    <div class="stats-card rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold text-sky-400 mb-2">8+</div>
-                        <div class="text-sm text-gray-300 font-medium">Live Projects</div>
-                    </div>
-                    <div class="stats-card rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold text-purple-400 mb-2">100K+</div>
-                        <div class="text-sm text-gray-300 font-medium">YouTube Views</div>
-                    </div>
-                    <div class="stats-card rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold text-pink-400 mb-2">5K+</div>
-                        <div class="text-sm text-gray-300 font-medium">Subscribers</div>
-                    </div>
-                    <div class="stats-card rounded-2xl p-6 text-center">
-                        <div class="text-3xl font-bold text-green-400 mb-2">50+</div>
-                        <div class="text-sm text-gray-300 font-medium">Technologies</div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <!-- Logo with one-time animation -->
+            <div class="hero-logo-container">
+                <div class="hero-logo-ring">
+                    <div class="hero-logo">
+                        <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" 
+                             alt="Aurelio Tech Logo" 
+                             class="logo-image"
+                             onload="this.style.opacity=1; this.nextElementSibling.style.display='none';"
+                             style="opacity:0; transition: opacity 0.5s ease;"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="logo-fallback" style="display: none;">AT</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Enhanced scroll indicator -->
-            <div class="absolute bottom-10 animate-bounce">
-                <a href="#about" class="text-sky-400 hover:text-sky-300 transition-colors">
-                    <i data-lucide="arrow-down" class="w-8 h-8"></i>
+            <!-- Hero Text -->
+            <h1 class="hero-title text-readable">Aurelio Tech</h1>
+
+            <p class="hero-subtitle text-readable">
+                Flutter & AI Automation Developer
+            </p>
+
+            <div class="text-xl md:text-2xl text-center min-h-[80px] mb-8 text-readable">
+                <span id="typedTagline"></span>
+            </div>
+
+            <p class="hero-description text-readable">
+                <strong>Python Expert</strong> | <strong>Hardware Specialist</strong> | <strong>Creative Content Creator</strong><br>
+                Building the Future with Code & Innovation
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">
+                    <i data-lucide="code" width="20" height="20"></i>
+                    View My Work
+                </a>
+                <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="btn btn-secondary">
+                    <i data-lucide="play" width="20" height="20"></i>
+                    YouTube Channel
+                </a>
+                <a href="https://github.com/CodeWithHarry123" target="_blank" class="btn btn-secondary">
+                    <i data-lucide="github" width="20" height="20"></i>
+                    GitHub Profile
                 </a>
             </div>
-        </section>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">8+</div>
+                    <div class="stat-label">Live Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">YouTube Views</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5K+</div>
+                    <div class="stat-label">Subscribers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Technologies</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <a href="#about">
+                <i data-lucide="chevron-down" width="32" height="32" style="color: rgba(255,255,255,0.8);"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
 
         <!-- About Section -->
-        <section id="about" class="py-24 section-card p-16">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold text-gray-800 mb-4">About Me</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
-                <p class="text-xl text-purple-600 font-semibold">A Fusion of Code, AI & Innovation</p>
+        <section id="about" class="section-card section-padding">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">A Fusion of Code, AI & Innovation</p>
             </div>
-            <div class="max-w-6xl mx-auto">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="text-lg text-gray-700 leading-relaxed space-y-6">
-                        <p>
-                            I'm <strong class="text-purple-600">Aurelio Tech</strong>, a passionate developer and innovator with expertise spanning <strong class="text-sky-600">Flutter development, Python programming, AI automation, and hardware engineering</strong>. My unique combination of technical prowess and creative vision enables me to build solutions that push the boundaries of what's possible.
+
+            <div class="grid-responsive grid-2">
+                <div>
+                    <div style="font-size: 1.125rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
+                        <p style="margin-bottom: 1.5rem;">
+                            I'm <strong style="color: var(--text-accent);">Aurelio Tech</strong>, a passionate developer and innovator with expertise spanning <strong>Flutter development, Python programming, AI automation, and hardware engineering</strong>. My unique combination of technical prowess and creative vision enables me to build solutions that push the boundaries of what's possible.
+                        </p>
+                        <p style="margin-bottom: 1.5rem;">
+                            With deep expertise in <strong>advanced Python algorithms, machine learning, robotics, Arduino, and Raspberry Pi</strong>, I create intelligent systems that solve real-world problems. From building Marvel-inspired Jarvis assistants to developing hi-tech security systems, I bring science fiction to reality.
                         </p>
                         <p>
-                            With deep expertise in <strong class="text-indigo-600">advanced Python algorithms, machine learning, robotics, Arduino, and Raspberry Pi</strong>, I create intelligent systems that solve real-world problems. From building Marvel-inspired Jarvis assistants to developing hi-tech security systems for homes and farms, I bring science fiction to reality.
-                        </p>
-                        <p>
-                            My work spans multiple domains: <strong class="text-rose-600">mobile app development, AI automation, hardware programming, and YouTube content creation</strong>. I believe in sharing knowledge freely, which is why I created comprehensive learning resources and maintain an active YouTube channel to help others master these technologies.
+                            My work spans multiple domains: <strong>mobile app development, AI automation, hardware programming, and YouTube content creation</strong>. I believe in sharing knowledge freely through comprehensive learning resources and educational content.
                         </p>
                     </div>
-                    <div class="bg-gradient-to-br from-purple-600 to-sky-600 p-8 rounded-3xl text-white shadow-2xl">
-                        <h3 class="text-2xl font-bold mb-6">Core Expertise</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4">🚀</span>
-                                <span>Full-Stack Mobile & Web Development</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4">🤖</span>
-                                <span>Advanced AI & Machine Learning</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4">🐍</span>
-                                <span>Python Expert & Algorithm Specialist</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4">🔧</span>
-                                <span>Hardware & Robotics Engineering</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4">🎬</span>
-                                <span>Educational Content Creation</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-2xl mr-4">⚡</span>
-                                <span>Automation & Smart Systems</span>
-                            </div>
+                </div>
+
+                <div class="skill-card" style="background: var(--gradient-accent); color: white; border: none;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: white;">Core Expertise</h3>
+                    <div style="display: flex; flex-direction: column; gap: 1rem; text-align: left;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">🚀</span>
+                            <span>Full-Stack Mobile & Web Development</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">🤖</span>
+                            <span>Advanced AI & Machine Learning</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">🐍</span>
+                            <span>Python Expert & Algorithm Specialist</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">🔧</span>
+                            <span>Hardware & Robotics Engineering</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">🎬</span>
+                            <span>Educational Content Creation</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem;">⚡</span>
+                            <span>Automation & Smart Systems</span>
                         </div>
                     </div>
                 </div>
@@ -579,546 +1111,584 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="py-24 section-card p-16">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold text-gray-800 mb-4">Technical Mastery</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
-                <p class="text-xl text-purple-600 font-semibold">My Developer's Comprehensive Toolkit</p>
+        <section id="skills" class="section-card section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Technical Mastery</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">My Developer's Comprehensive Toolkit</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <div class="grid-responsive grid-3">
                 <!-- Mobile Development -->
-                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-sky-200 shadow-xl hover:shadow-2xl transition-all">
-                    <div class="flex justify-center mb-6">
-                        <div class="p-4 bg-sky-100 rounded-full skill-icon transition-transform duration-300">
-                           <i data-lucide="smartphone" class="w-12 h-12 text-sky-600"></i>
-                        </div>
+                <div class="skill-card">
+                    <div class="skill-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+                        <i data-lucide="smartphone" width="32" height="32" style="color: white;"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Mobile Development</h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Flutter</span>
-                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Android</span>
-                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Firebase</span>
-                        <span class="bg-sky-100 text-sky-800 px-3 py-1 rounded-full text-sm font-semibold">Kotlin</span>
+                    <h3 class="skill-title">Mobile Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Flutter</span>
+                        <span class="skill-tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Android</span>
+                        <span class="skill-tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Firebase</span>
+                        <span class="skill-tag" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">Kotlin</span>
                     </div>
                 </div>
 
                 <!-- Python & AI -->
-                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-purple-200 shadow-xl hover:shadow-2xl transition-all">
-                    <div class="flex justify-center mb-6">
-                        <div class="p-4 bg-purple-100 rounded-full skill-icon transition-transform duration-300">
-                           <i data-lucide="brain" class="w-12 h-12 text-purple-600"></i>
-                        </div>
+                <div class="skill-card">
+                    <div class="skill-icon" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+                        <i data-lucide="brain" width="32" height="32" style="color: white;"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Python & AI</h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Advanced Python</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Machine Learning</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">AI Algorithms</span>
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-semibold">Neural Networks</span>
+                    <h3 class="skill-title">Python & AI</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">Advanced Python</span>
+                        <span class="skill-tag" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">Machine Learning</span>
+                        <span class="skill-tag" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">AI Algorithms</span>
+                        <span class="skill-tag" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;">Neural Networks</span>
                     </div>
                 </div>
 
-                <!-- Automation & AI Tools -->
-                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-indigo-200 shadow-xl hover:shadow-2xl transition-all">
-                    <div class="flex justify-center mb-6">
-                        <div class="p-4 bg-indigo-100 rounded-full skill-icon transition-transform duration-300">
-                           <i data-lucide="bot" class="w-12 h-12 text-indigo-600"></i>
-                        </div>
+                <!-- Automation & AI -->
+                <div class="skill-card">
+                    <div class="skill-icon" style="background: linear-gradient(135deg, #6366f1, #4338ca);">
+                        <i data-lucide="bot" width="32" height="32" style="color: white;"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Automation & AI</h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">n8n Workflows</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">TTS Integration</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">Chatbots</span>
-                        <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-semibold">API Integration</span>
+                    <h3 class="skill-title">Automation & AI</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">n8n Workflows</span>
+                        <span class="skill-tag" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">TTS Integration</span>
+                        <span class="skill-tag" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">Chatbots</span>
+                        <span class="skill-tag" style="background: rgba(99, 102, 241, 0.1); color: #6366f1;">API Integration</span>
                     </div>
                 </div>
 
                 <!-- Hardware & Robotics -->
-                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-green-200 shadow-xl hover:shadow-2xl transition-all">
-                     <div class="flex justify-center mb-6">
-                        <div class="p-4 bg-green-100 rounded-full skill-icon transition-transform duration-300">
-                           <i data-lucide="cpu" class="w-12 h-12 text-green-600"></i>
-                        </div>
+                <div class="skill-card">
+                    <div class="skill-icon" style="background: linear-gradient(135deg, #10b981, #047857);">
+                        <i data-lucide="cpu" width="32" height="32" style="color: white;"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Hardware & Robotics</h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Arduino</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Raspberry Pi</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">IoT Systems</span>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">Sensors</span>
+                    <h3 class="skill-title">Hardware & Robotics</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Arduino</span>
+                        <span class="skill-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Raspberry Pi</span>
+                        <span class="skill-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">IoT Systems</span>
+                        <span class="skill-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">Sensors</span>
                     </div>
                 </div>
 
                 <!-- Creative & Design -->
-                 <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-rose-200 shadow-xl hover:shadow-2xl transition-all">
-                     <div class="flex justify-center mb-6">
-                        <div class="p-4 bg-rose-100 rounded-full skill-icon transition-transform duration-300">
-                           <i data-lucide="palette" class="w-12 h-12 text-rose-600"></i>
-                        </div>
+                <div class="skill-card">
+                    <div class="skill-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <i data-lucide="palette" width="32" height="32" style="color: white;"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Creative & Design</h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">Blender</span>
-                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">3D Animation</span>
-                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">Video Editing</span>
-                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-sm font-semibold">UI/UX Design</span>
+                    <h3 class="skill-title">Creative & Design</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">Blender</span>
+                        <span class="skill-tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">3D Animation</span>
+                        <span class="skill-tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">Video Editing</span>
+                        <span class="skill-tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">UI/UX Design</span>
                     </div>
                 </div>
 
                 <!-- Web Technologies -->
-                <div class="glass-effect p-8 rounded-3xl text-center skill-card bg-white border border-amber-200 shadow-xl hover:shadow-2xl transition-all">
-                     <div class="flex justify-center mb-6">
-                        <div class="p-4 bg-amber-100 rounded-full skill-icon transition-transform duration-300">
-                           <i data-lucide="globe" class="w-12 h-12 text-amber-600"></i>
-                        </div>
+                <div class="skill-card">
+                    <div class="skill-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i data-lucide="globe" width="32" height="32" style="color: white;"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 text-gray-800">Web Technologies</h3>
-                    <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">HTML5/CSS3</span>
-                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">JavaScript</span>
-                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">REST APIs</span>
-                        <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-semibold">Cloud Deploy</span>
+                    <h3 class="skill-title">Web Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">HTML5/CSS3</span>
+                        <span class="skill-tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">JavaScript</span>
+                        <span class="skill-tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">REST APIs</span>
+                        <span class="skill-tag" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;">Cloud Deploy</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects" class="py-24 section-card p-16">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold text-gray-800 mb-4">Featured Projects</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
-                <p class="text-xl text-purple-600 font-semibold">Where Innovation Meets Implementation</p>
+        <section id="projects" class="section-card section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Where Innovation Meets Implementation</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-                <!-- AurelioX TTS App -->
-                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-sky-100 hover:shadow-2xl transition-all">
-                    <div class="bg-gradient-to-r from-sky-500 to-blue-600 p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2">🔊 AurelioX - Advanced TTS</h3>
-                        <p class="text-sky-100">Multi-Language Text-to-Speech Platform</p>
+            <div class="grid-responsive grid-2">
+                <!-- Project 1: AurelioX TTS -->
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">
+                        <h3 class="project-title">🔊 AurelioX - Advanced TTS</h3>
+                        <p class="project-subtitle">Multi-Language Text-to-Speech Platform</p>
                     </div>
-                    <div class="p-8">
-                        <div class="mb-4">
-                            <p class="font-semibold text-orange-600">Problem:</p>
-                            <p class="text-gray-600">Lack of high-quality, multilingual TTS solutions with advanced customization options.</p>
+                    <div class="project-body">
+                        <div class="project-section">
+                            <p class="project-label">Problem:</p>
+                            <p class="project-text">Lack of high-quality, multilingual TTS solutions with advanced customization options.</p>
                         </div>
-                        <div class="mb-4">
-                            <p class="font-semibold text-teal-600">Solution:</p>
-                            <p class="text-gray-600">Developed AurelioX using advanced TTS APIs with voice customization and multi-language support.</p>
+                        <div class="project-section">
+                            <p class="project-label">Solution:</p>
+                            <p class="project-text">Developed AurelioX using advanced TTS APIs with voice customization and multi-language support.</p>
                         </div>
-                        <div class="mb-6">
-                            <p class="font-semibold text-green-600">Outcome:</p>
-                            <p class="text-gray-600">Professional-grade TTS platform with natural voice synthesis and batch processing.</p>
+                        <div class="project-section">
+                            <p class="project-label">Outcome:</p>
+                            <p class="project-text">Professional-grade TTS platform with natural voice synthesis and batch processing.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">HTML5/CSS3</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">TTS APIs</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Web Audio</span>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5/CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">TTS APIs</span>
+                            <span class="project-tag">Web Audio</span>
                         </div>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/CodeWithHarry123/TextToSpeechApp" target="_blank" class="flex-1 bg-sky-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-sky-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
+                        <div class="project-actions">
+                            <a href="https://github.com/CodeWithHarry123/TextToSpeechApp" target="_blank" class="btn btn-primary">
+                                <i data-lucide="github" width="16" height="16"></i>
+                                GitHub Repo
                             </a>
-                            <a href="https://aureliotexttospeech.netlify.app" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Live Demo
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Advanced QR Generator -->
-                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-purple-100 hover:shadow-2xl transition-all">
-                    <div class="bg-gradient-to-r from-purple-500 to-indigo-600 p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2">📱 Advanced QR Generator</h3>
-                        <p class="text-purple-100">Professional QR Code Creation Platform</p>
-                    </div>
-                    <div class="p-8">
-                        <div class="mb-4">
-                            <p class="font-semibold text-orange-600">Problem:</p>
-                            <p class="text-gray-600">Need for advanced QR code generation with logo integration and custom styling.</p>
-                        </div>
-                        <div class="mb-4">
-                            <p class="font-semibold text-teal-600">Solution:</p>
-                            <p class="text-gray-600">Built comprehensive QR generator with 50+ presets, gradient colors, and 3D design.</p>
-                        </div>
-                        <div class="mb-6">
-                            <p class="font-semibold text-green-600">Outcome:</p>
-                            <p class="text-gray-600">Professional QR generation tool with ultra-HD output and commercial-grade quality.</p>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Canvas API</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">CSS3</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">File Processing</span>
-                        </div>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/CodeWithHarry123/QR_CODE_GENRATOR" target="_blank" class="flex-1 bg-purple-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-purple-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
-                            </a>
-                            <a href="https://codewithharry123.github.io/QR_CODE_GENRATOR/" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Live Demo
+                            <a href="https://aureliotexttospeech.netlify.app" target="_blank" class="btn btn-secondary">
+                                <i data-lucide="external-link" width="16" height="16"></i>
+                                Live Demo
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- WhatsApp Automation Bot -->
-                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-green-100 hover:shadow-2xl transition-all">
-                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2">💬 WhatsApp Automation Bot</h3>
-                        <p class="text-green-100">Intelligent Messaging & Auto-Reply System</p>
+                <!-- Project 2: QR Generator -->
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9);">
+                        <h3 class="project-title">📱 Advanced QR Generator</h3>
+                        <p class="project-subtitle">Professional QR Code Creation Platform</p>
                     </div>
-                    <div class="p-8">
-                        <div class="mb-4">
-                            <p class="font-semibold text-orange-600">Problem:</p>
-                            <p class="text-gray-600">Need for automated WhatsApp messaging and intelligent auto-reply functionality.</p>
+                    <div class="project-body">
+                        <div class="project-section">
+                            <p class="project-label">Problem:</p>
+                            <p class="project-text">Need for advanced QR code generation with logo integration and custom styling.</p>
                         </div>
-                        <div class="mb-4">
-                            <p class="font-semibold text-teal-600">Solution:</p>
-                            <p class="text-gray-600">Developed Node.js bot with QR authentication and smart auto-reply system.</p>
+                        <div class="project-section">
+                            <p class="project-label">Solution:</p>
+                            <p class="project-text">Built comprehensive QR generator with 50+ presets, gradient colors, and 3D design.</p>
                         </div>
-                        <div class="mb-6">
-                            <p class="font-semibold text-green-600">Outcome:</p>
-                            <p class="text-gray-600">Efficient communication automation saving hours of manual messaging.</p>
+                        <div class="project-section">
+                            <p class="project-label">Outcome:</p>
+                            <p class="project-text">Professional QR generation tool with ultra-HD output and commercial-grade quality.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Node.js</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">WhatsApp API</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">QR Auth</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Automation</span>
+                        <div class="project-tags">
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Canvas API</span>
+                            <span class="project-tag">CSS3</span>
+                            <span class="project-tag">File Processing</span>
                         </div>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/CodeWithHarry123/whatsapp-bot" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
+                        <div class="project-actions">
+                            <a href="https://github.com/CodeWithHarry123/QR_CODE_GENRATOR" target="_blank" class="btn btn-primary">
+                                <i data-lucide="github" width="16" height="16"></i>
+                                GitHub Repo
+                            </a>
+                            <a href="https://codewithharry123.github.io/QR_CODE_GENRATOR/" target="_blank" class="btn btn-secondary">
+                                <i data-lucide="external-link" width="16" height="16"></i>
+                                Live Demo
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Giveaway Program -->
-                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-pink-100 hover:shadow-2xl transition-all">
-                    <div class="bg-gradient-to-r from-pink-500 to-rose-600 p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2">🎁 Interactive Giveaway Platform</h3>
-                        <p class="text-pink-100">YouTube Channel Growth & Engagement Tool</p>
+                <!-- Project 3: WhatsApp Bot -->
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #10b981, #047857);">
+                        <h3 class="project-title">💬 WhatsApp Automation Bot</h3>
+                        <p class="project-subtitle">Intelligent Messaging & Auto-Reply System</p>
                     </div>
-                    <div class="p-8">
-                        <div class="mb-4">
-                            <p class="font-semibold text-orange-600">Problem:</p>
-                            <p class="text-gray-600">Need for engaging giveaway system that promotes YouTube channel growth.</p>
+                    <div class="project-body">
+                        <div class="project-section">
+                            <p class="project-label">Problem:</p>
+                            <p class="project-text">Need for automated WhatsApp messaging and intelligent auto-reply functionality.</p>
                         </div>
-                        <div class="mb-4">
-                            <p class="font-semibold text-teal-600">Solution:</p>
-                            <p class="text-gray-600">Created interactive platform requiring YouTube subscription for participation.</p>
+                        <div class="project-section">
+                            <p class="project-label">Solution:</p>
+                            <p class="project-text">Developed Node.js bot with QR authentication and smart auto-reply system.</p>
                         </div>
-                        <div class="mb-6">
-                            <p class="font-semibold text-green-600">Outcome:</p>
-                            <p class="text-gray-600">Successful engagement tool that increased channel subscribers significantly.</p>
+                        <div class="project-section">
+                            <p class="project-label">Outcome:</p>
+                            <p class="project-text">Efficient communication automation saving hours of manual messaging.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">HTML5/CSS3</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">JavaScript</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">YouTube API</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Form Processing</span>
+                        <div class="project-tags">
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">WhatsApp API</span>
+                            <span class="project-tag">QR Auth</span>
+                            <span class="project-tag">Automation</span>
                         </div>
-                        <div class="flex space-x-4">
-                            <a href="https://github.com/CodeWithHarry123/Giveaway_program" target="_blank" class="flex-1 bg-pink-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-pink-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub Repo
-                            </a>
-                            <a href="https://giveawayprogram.netlify.app" target="_blank" class="flex-1 bg-green-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Live Demo
+                        <div class="project-actions">
+                            <a href="https://github.com/CodeWithHarry123/whatsapp-bot" target="_blank" class="btn btn-primary">
+                                <i data-lucide="github" width="16" height="16"></i>
+                                GitHub Repo
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Aurelio AI Platform -->
-                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-indigo-100 hover:shadow-2xl transition-all">
-                    <div class="bg-gradient-to-r from-indigo-500 to-blue-600 p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2">🤖 Aurelio AI Platform</h3>
-                        <p class="text-indigo-100">YouTube Content Optimization Suite</p>
+                <!-- Project 4: Giveaway Platform -->
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <h3 class="project-title">🎁 Interactive Giveaway Platform</h3>
+                        <p class="project-subtitle">YouTube Channel Growth & Engagement Tool</p>
                     </div>
-                    <div class="p-8">
-                        <div class="mb-4">
-                            <p class="font-semibold text-orange-600">Problem:</p>
-                            <p class="text-gray-600">Content creators need AI-powered assistance for YouTube optimization.</p>
+                    <div class="project-body">
+                        <div class="project-section">
+                            <p class="project-label">Problem:</p>
+                            <p class="project-text">Need for engaging giveaway system that promotes YouTube channel growth.</p>
                         </div>
-                        <div class="mb-4">
-                            <p class="font-semibold text-teal-600">Solution:</p>
-                            <p class="text-gray-600">Built AI-integrated platform generating SEO-optimized titles, descriptions, and tags.</p>
+                        <div class="project-section">
+                            <p class="project-label">Solution:</p>
+                            <p class="project-text">Created interactive platform requiring YouTube subscription for participation.</p>
                         </div>
-                        <div class="mb-6">
-                            <p class="font-semibold text-green-600">Outcome:</p>
-                            <p class="text-gray-600">Comprehensive AI tool streamlining YouTube content creation process.</p>
+                        <div class="project-section">
+                            <p class="project-label">Outcome:</p>
+                            <p class="project-text">Successful engagement tool that increased channel subscribers significantly.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">AI Integration</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">NLP</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">SEO</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Content Gen</span>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML5/CSS3</span>
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">YouTube API</span>
+                            <span class="project-tag">Form Processing</span>
                         </div>
-                        <div class="flex space-x-4">
-                            <a href="https://aureliodirect.netlify.app" target="_blank" class="flex-1 bg-indigo-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-indigo-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Access Platform
+                        <div class="project-actions">
+                            <a href="https://github.com/CodeWithHarry123/Giveaway_program" target="_blank" class="btn btn-primary">
+                                <i data-lucide="github" width="16" height="16"></i>
+                                GitHub Repo
+                            </a>
+                            <a href="https://giveawayprogram.netlify.app" target="_blank" class="btn btn-secondary">
+                                <i data-lucide="external-link" width="16" height="16"></i>
+                                Live Demo
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Flutter Learning Platform -->
-                <div class="glass-effect rounded-3xl overflow-hidden project-card bg-white shadow-xl border border-emerald-100 hover:shadow-2xl transition-all">
-                    <div class="bg-gradient-to-r from-emerald-500 to-teal-600 p-6">
-                        <h3 class="text-2xl font-bold text-white mb-2">📚 Flutter Learning Platform</h3>
-                        <p class="text-emerald-100">Comprehensive Flutter Course Website</p>
+                <!-- Project 5: Aurelio AI Platform -->
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #6366f1, #4338ca);">
+                        <h3 class="project-title">🤖 Aurelio AI Platform</h3>
+                        <p class="project-subtitle">YouTube Content Optimization Suite</p>
                     </div>
-                    <div class="p-8">
-                        <div class="mb-4">
-                            <p class="font-semibold text-orange-600">Problem:</p>
-                            <p class="text-gray-600">Beginners need structured Flutter tutorials with hands-on examples.</p>
+                    <div class="project-body">
+                        <div class="project-section">
+                            <p class="project-label">Problem:</p>
+                            <p class="project-text">Content creators need AI-powered assistance for YouTube optimization.</p>
                         </div>
-                        <div class="mb-4">
-                            <p class="font-semibold text-teal-600">Solution:</p>
-                            <p class="text-gray-600">Developed comprehensive learning platform with module-by-module course structure.</p>
+                        <div class="project-section">
+                            <p class="project-label">Solution:</p>
+                            <p class="project-text">Built AI-integrated platform generating SEO-optimized titles, descriptions, and tags.</p>
                         </div>
-                        <div class="mb-6">
-                            <p class="font-semibold text-green-600">Outcome:</p>
-                            <p class="text-gray-600">Educational platform helping hundreds learn Flutter from scratch to advanced.</p>
+                        <div class="project-section">
+                            <p class="project-label">Outcome:</p>
+                            <p class="project-text">Comprehensive AI tool streamlining YouTube content creation process.</p>
                         </div>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Educational Design</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Interactive</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Progressive</span>
-                            <span class="bg-gray-100 text-gray-800 text-xs font-semibold px-3 py-1 rounded-full">Documentation</span>
+                        <div class="project-tags">
+                            <span class="project-tag">AI Integration</span>
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">SEO</span>
+                            <span class="project-tag">Content Gen</span>
                         </div>
-                        <div class="flex space-x-4">
-                            <a href="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/" target="_blank" class="flex-1 bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl hover:bg-emerald-600 transition-colors flex items-center justify-center shadow-lg">
-                                <i data-lucide="external-link" class="w-5 h-5 mr-2"></i> Access Course
+                        <div class="project-actions">
+                            <a href="https://aureliodirect.netlify.app" target="_blank" class="btn btn-primary">
+                                <i data-lucide="external-link" width="16" height="16"></i>
+                                Access Platform
                             </a>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </section>
-
-        <!-- YouTube & Creative Section -->
-        <section id="creative" class="py-24 section-card p-16">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold text-gray-800 mb-4">Content Creation Excellence</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-red-500 mx-auto mb-4 rounded-full"></div>
-                <p class="text-xl text-red-600 font-semibold">Aurelio Tech - Knowledge Sharing Platform</p>
-            </div>
-            <div class="max-w-6xl mx-auto bg-gradient-to-r from-red-500 to-red-600 rounded-3xl p-12 text-white shadow-2xl">
-                 <div class="text-center">
-                     <h3 class="text-4xl font-bold mb-6">🔔 Subscribe to Aurelio Tech</h3>
-                     <p class="text-xl leading-relaxed mb-8 max-w-4xl mx-auto">Empowering developers worldwide with free, high-quality programming tutorials and cutting-edge technology insights. Join our growing community of learners and innovators!</p>
-
-                     <!-- YouTube Stats -->
-                     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
-                             <div class="text-4xl font-bold mb-2">100K+</div>
-                             <div class="text-sm opacity-90">Total Views</div>
-                         </div>
-                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
-                             <div class="text-4xl font-bold mb-2">5K+</div>
-                             <div class="text-sm opacity-90">Subscribers</div>
-                         </div>
-                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
-                             <div class="text-4xl font-bold mb-2">200+</div>
-                             <div class="text-sm opacity-90">Educational Videos</div>
-                         </div>
-                         <div class="text-center bg-red-600/30 rounded-xl p-6 backdrop-filter backdrop-blur-sm">
-                             <div class="text-4xl font-bold mb-2">90%</div>
-                             <div class="text-sm opacity-90">Positive Feedback</div>
-                         </div>
-                     </div>
-
-                     <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="inline-flex items-center bg-white text-red-600 font-bold py-4 px-10 rounded-full text-xl hover:bg-gray-100 transition-colors shadow-2xl hover:shadow-3xl transform hover:scale-105">
-                         <i data-lucide="play" class="w-6 h-6 mr-3"></i>
-                         Subscribe Now
-                     </a>
-                 </div>
+                <!-- Project 6: Flutter Learning Platform -->
+                <div class="project-card">
+                    <div class="project-header" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                        <h3 class="project-title">📚 Flutter Learning Platform</h3>
+                        <p class="project-subtitle">Comprehensive Flutter Course Website</p>
+                    </div>
+                    <div class="project-body">
+                        <div class="project-section">
+                            <p class="project-label">Problem:</p>
+                            <p class="project-text">Beginners need structured Flutter tutorials with hands-on examples.</p>
+                        </div>
+                        <div class="project-section">
+                            <p class="project-label">Solution:</p>
+                            <p class="project-text">Developed comprehensive learning platform with module-by-module course structure.</p>
+                        </div>
+                        <div class="project-section">
+                            <p class="project-label">Outcome:</p>
+                            <p class="project-text">Educational platform helping hundreds learn Flutter from scratch to advanced.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="project-tag">Educational Design</span>
+                            <span class="project-tag">Interactive</span>
+                            <span class="project-tag">Progressive</span>
+                            <span class="project-tag">Documentation</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/" target="_blank" class="btn btn-primary">
+                                <i data-lucide="external-link" width="16" height="16"></i>
+                                Access Course
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Contact Section - FIXED EMAIL DISPLAY -->
-        <section id="contact" class="py-24 text-center section-card p-16">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold text-gray-800 mb-4">Let's Create Something Revolutionary</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-600 to-sky-600 mx-auto mb-4 rounded-full"></div>
-                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">Ready to bring your vision to life? Whether it's mobile apps, AI solutions, hardware projects, or educational content - I'm here to make it happen with cutting-edge technology and innovative thinking.</p>
+        <!-- YouTube Section -->
+        <section class="section-card section-padding" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none;">
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;">Content Creation Excellence</h2>
+                <div class="divider" style="background: rgba(255,255,255,0.3);"></div>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Aurelio Tech - Knowledge Sharing Platform</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-16">
-                <!-- Email - FIXED DISPLAY -->
-                <div class="contact-card bg-gradient-to-br from-blue-100 to-blue-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="mail" class="w-10 h-10 text-white"></i>
+            <div style="text-align: center;">
+                <h3 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1.5rem;">🔔 Subscribe to Aurelio Tech</h3>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.8;">
+                    Empowering developers worldwide with free, high-quality programming tutorials and cutting-edge technology insights. Join our growing community of learners and innovators!
+                </p>
+
+                <!-- YouTube Stats -->
+                <div class="stats-grid" style="margin-bottom: 2rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">100K+</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Total Views</div>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Email</h3>
-                    <p class="email-display text-gray-600 mb-6">Professional Contact</p>
-                    <a href="mailto:aureliocorporation7@gmail.com" class="inline-flex items-center bg-blue-500 text-white px-6 py-3 rounded-xl hover:bg-blue-600 transition-colors shadow-lg">
-                        <i data-lucide="send" class="w-4 h-4 mr-2"></i>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">5K+</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Subscribers</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">200+</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Educational Videos</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                        <div style="font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;">90%</div>
+                        <div style="font-size: 0.875rem; opacity: 0.9;">Positive Feedback</div>
+                    </div>
+                </div>
+
+                <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" 
+                   style="display: inline-flex; align-items: center; gap: 0.75rem; background: white; color: #ef4444; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; font-size: 1.125rem; text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: all 0.3s ease;"
+                   onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.4)'"
+                   onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 10px 30px rgba(0,0,0,0.3)'">
+                    <i data-lucide="play" width="24" height="24"></i>
+                    Subscribe Now
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-card section-padding">
+            <div class="section-header">
+                <h2 class="section-title">Let's Create Something Revolutionary</h2>
+                <div class="divider"></div>
+                <p class="section-subtitle">Ready to bring your vision to life?</p>
+            </div>
+
+            <p style="text-align: center; font-size: 1.125rem; color: var(--text-secondary); margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+                Whether it's mobile apps, AI solutions, hardware projects, or educational content - I'm here to make it happen with cutting-edge technology and innovative thinking.
+            </p>
+
+            <div class="grid-responsive" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <!-- Email -->
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i data-lucide="mail" width="24" height="24"></i>
+                    </div>
+                    <h3 class="contact-title">Email</h3>
+                    <p class="contact-text">Professional Contact</p>
+                    <a href="mailto:aureliocorporation7@gmail.com" class="btn btn-primary">
+                        <i data-lucide="send" width="16" height="16"></i>
                         Send Email
                     </a>
                 </div>
 
                 <!-- LinkedIn -->
-                <div class="contact-card bg-gradient-to-br from-indigo-100 to-indigo-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                    <div class="w-20 h-20 bg-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="linkedin" class="w-10 h-10 text-white"></i>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i data-lucide="linkedin" width="24" height="24"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">LinkedIn</h3>
-                    <p class="text-gray-600 mb-6">Professional Network</p>
-                    <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" class="inline-flex items-center bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition-colors shadow-lg">
-                        <i data-lucide="user-plus" class="w-4 h-4 mr-2"></i>
+                    <h3 class="contact-title">LinkedIn</h3>
+                    <p class="contact-text">Professional Network</p>
+                    <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" class="btn btn-primary">
+                        <i data-lucide="user-plus" width="16" height="16"></i>
                         Connect
                     </a>
                 </div>
 
                 <!-- GitHub -->
-                <div class="contact-card bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                    <div class="w-20 h-20 bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="github" class="w-10 h-10 text-white"></i>
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i data-lucide="github" width="24" height="24"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">GitHub</h3>
-                    <p class="text-gray-600 mb-6">Code Repository</p>
-                    <a href="https://github.com/CodeWithHarry123" target="_blank" class="inline-flex items-center bg-gray-800 text-white px-6 py-3 rounded-xl hover:bg-gray-700 transition-colors shadow-lg">
-                        <i data-lucide="code" class="w-4 h-4 mr-2"></i>
+                    <h3 class="contact-title">GitHub</h3>
+                    <p class="contact-text">Code Repository</p>
+                    <a href="https://github.com/CodeWithHarry123" target="_blank" class="btn btn-primary">
+                        <i data-lucide="code" width="16" height="16"></i>
                         View Code
                     </a>
                 </div>
 
                 <!-- YouTube -->
-                <div class="contact-card bg-gradient-to-br from-red-100 to-red-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                    <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="youtube" class="w-10 h-10 text-white"></i>
+                <div class="contact-card">
+                    <div class="contact-icon" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i data-lucide="youtube" width="24" height="24"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">YouTube</h3>
-                    <p class="text-gray-600 mb-6">Aurelio Tech</p>
-                    <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="inline-flex items-center bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-colors shadow-lg">
-                        <i data-lucide="play" class="w-4 h-4 mr-2"></i>
+                    <h3 class="contact-title">YouTube</h3>
+                    <p class="contact-text">Aurelio Tech</p>
+                    <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <i data-lucide="play" width="16" height="16"></i>
                         Subscribe
                     </a>
                 </div>
 
                 <!-- Flutter Course -->
-                <div class="contact-card bg-gradient-to-br from-emerald-100 to-emerald-200 p-6 rounded-3xl shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                    <div class="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="book-open" class="w-10 h-10 text-white"></i>
+                <div class="contact-card">
+                    <div class="contact-icon" style="background: linear-gradient(135deg, #10b981, #047857);">
+                        <i data-lucide="book-open" width="24" height="24"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">Flutter Course</h3>
-                    <p class="text-gray-600 mb-6">Free Learning Platform</p>
-                    <a href="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/" target="_blank" class="inline-flex items-center bg-emerald-600 text-white px-6 py-3 rounded-xl hover:bg-emerald-700 transition-colors shadow-lg">
-                        <i data-lucide="graduation-cap" class="w-4 h-4 mr-2"></i>
+                    <h3 class="contact-title">Flutter Course</h3>
+                    <p class="contact-text">Free Learning Platform</p>
+                    <a href="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/" target="_blank" class="btn btn-primary" style="background: linear-gradient(135deg, #10b981, #047857);">
+                        <i data-lucide="graduation-cap" width="16" height="16"></i>
                         Start Learning
                     </a>
                 </div>
             </div>
 
-            <!-- Why Choose Me Section -->
-            <div class="bg-gradient-to-br from-purple-50 to-indigo-50 p-12 rounded-3xl shadow-2xl">
-                <h3 class="text-4xl font-bold text-gray-800 mb-12">Why Partner With Aurelio Tech?</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">🚀</div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Rapid Innovation</h4>
-                        <p class="text-gray-600 leading-relaxed">Lightning-fast development with cutting-edge technologies and proven methodologies.</p>
+            <!-- Why Choose Me -->
+            <div style="background: var(--bg-secondary); padding: 3rem 2rem; border-radius: 25px; border: 2px solid var(--border-color);">
+                <h3 style="font-size: 2rem; font-weight: 800; text-align: center; margin-bottom: 2rem; color: var(--text-primary);">Why Partner With Aurelio Tech?</h3>
+                <div class="grid-responsive grid-3">
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Rapid Innovation</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Lightning-fast development with cutting-edge technologies and proven methodologies.</p>
                     </div>
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">🧠</div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">AI & Hardware Expert</h4>
-                        <p class="text-gray-600 leading-relaxed">Unique combination of software and hardware engineering bridging digital and physical worlds.</p>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🧠</div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">AI & Hardware Expert</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Unique combination of software and hardware engineering bridging digital and physical worlds.</p>
                     </div>
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">🔧</div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">End-to-End Solutions</h4>
-                        <p class="text-gray-600 leading-relaxed">From concept to deployment - mobile apps, AI integration, hardware systems, and everything between.</p>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔧</div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">End-to-End Solutions</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">From concept to deployment - mobile apps, AI integration, hardware systems, and everything between.</p>
                     </div>
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">🎯</div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Problem Solver</h4>
-                        <p class="text-gray-600 leading-relaxed">Complex challenges require innovative thinking. I specialize in turning impossible ideas into working solutions.</p>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎯</div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Problem Solver</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Complex challenges require innovative thinking. I specialize in turning impossible ideas into working solutions.</p>
                     </div>
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">📈</div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Scalable Architecture</h4>
-                        <p class="text-gray-600 leading-relaxed">Future-proof solutions built with scalability in mind, ensuring seamless business growth.</p>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Scalable Architecture</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Future-proof solutions built with scalability in mind, ensuring seamless business growth.</p>
                     </div>
-                    <div class="text-center">
-                        <div class="text-6xl mb-6">🎓</div>
-                        <h4 class="text-2xl font-bold text-gray-800 mb-4">Knowledge Sharing</h4>
-                        <p class="text-gray-600 leading-relaxed">Not just development - I educate and empower teams, ensuring long-term success and technology transfer.</p>
+                    <div style="text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+                        <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Knowledge Sharing</h4>
+                        <p style="color: var(--text-secondary); line-height: 1.6;">Not just development - I educate and empower teams, ensuring long-term success and technology transfer.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-    </main>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-20 relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/10"></div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="flex justify-center items-center mb-6">
-                <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" alt="Aurelio Tech Logo" class="w-16 h-16 rounded-full mr-4 shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="w-16 h-16 rounded-full mr-4 shadow-lg bg-gradient-to-r from-purple-400 to-blue-400 flex items-center justify-center text-2xl font-bold" style="display: none;">AT</div>
-                <h3 class="text-4xl font-bold">Aurelio Tech</h3>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="https://codewithharry123.github.io/Flutter-Course-By-Aurelio-Tech/icon.png" 
+                     alt="Aurelio Tech Logo"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div style="display: none; width: 50px; height: 50px; background: var(--gradient-accent); border-radius: 50%; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 1.25rem;">AT</div>
+                <h3 class="footer-title">Aurelio Tech</h3>
             </div>
-            <p class="text-xl mb-10 opacity-90 max-w-2xl mx-auto">Building tomorrow's technology today - One innovation at a time</p>
-            <div class="flex justify-center space-x-10 mb-10">
-                <a href="https://github.com/CodeWithHarry123" target="_blank" class="text-white/80 hover:text-white transition-colors transform hover:scale-110">
-                    <i data-lucide="github" class="w-10 h-10"></i>
+
+            <p class="footer-desc">
+                Building tomorrow's technology today - One innovation at a time
+            </p>
+
+            <div class="footer-social">
+                <a href="https://github.com/CodeWithHarry123" target="_blank" class="social-link">
+                    <i data-lucide="github" width="24" height="24"></i>
                 </a>
-                <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="text-white/80 hover:text-white transition-colors transform hover:scale-110">
-                    <i data-lucide="youtube" class="w-10 h-10"></i>
+                <a href="https://www.youtube.com/@Aurelio_Tech-o4u" target="_blank" class="social-link" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                    <i data-lucide="youtube" width="24" height="24"></i>
                 </a>
-                <a href="mailto:aureliocorporation7@gmail.com" class="text-white/80 hover:text-white transition-colors transform hover:scale-110">
-                    <i data-lucide="mail" class="w-10 h-10"></i>
+                <a href="mailto:aureliocorporation7@gmail.com" class="social-link">
+                    <i data-lucide="mail" width="24" height="24"></i>
                 </a>
             </div>
-            <div class="border-t border-white/20 pt-8">
-                <p class="opacity-70 text-lg">&copy; 2025 Aurelio Tech. Innovating the Future with Code, AI & Hardware.</p>
+
+            <div class="footer-copy">
+                <p>&copy; 2025 Aurelio Tech. Innovating the Future with Code, AI & Hardware.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Loading Animation
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Loading screen
         window.addEventListener('load', function() {
             setTimeout(() => {
                 document.getElementById('loadingOverlay').classList.add('fade-out');
             }, 1000);
         });
 
-        // Lucide Icons
-        lucide.createIcons();
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const body = document.body;
+
+        // Check for saved theme or default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.setAttribute('data-lucide', theme === 'light' ? 'moon' : 'sun');
+            lucide.createIcons();
+        }
 
         // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('active');
         });
 
-        // Sticky Header on Scroll
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
         const header = document.getElementById('header');
-        let lastScrollY = window.scrollY;
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('py-2');
-                header.classList.remove('py-4');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
             } else {
-                header.classList.add('py-4');
-                header.classList.remove('py-2');
+                header.classList.remove('scrolled');
             }
-            lastScrollY = window.scrollY;
         });
 
-        // Enhanced Typed.js Animation for Hero Section Tagline
-        new Typed('#typed-tagline', {
+        // Typed.js for hero text
+        new Typed('#typedTagline', {
             strings: [
                 'Python Expert & Algorithm Specialist 🐍',
                 'Hardware & Robotics Engineer 🔧', 
@@ -1135,24 +1705,37 @@
             cursorChar: '|'
         });
 
-        // Enhanced ScrollReveal Animations
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ScrollReveal animations
         const sr = ScrollReveal({
-            distance: '80px',
-            duration: 2000,
-            delay: 200,
+            distance: '60px',
+            duration: 1500,
+            delay: 100,
             reset: false,
         });
 
-        sr.reveal('#hero h1, #hero p, #hero .flex', { origin: 'top', interval: 100 });
-        sr.reveal('#about h2, #skills h2, #projects h2, #creative h2, #contact h2', { origin: 'top' });
-        sr.reveal('#about div', { origin: 'bottom' });
-        sr.reveal('.skill-card', { interval: 150, origin: 'bottom' });
+        sr.reveal('.section-header', { origin: 'top' });
+        sr.reveal('.skill-card', { interval: 200, origin: 'bottom' });
         sr.reveal('.project-card', { interval: 200, origin: 'left' });
-        sr.reveal('#creative .mx-auto', { origin: 'right' });
-        sr.reveal('#contact .grid > div', { interval: 100, origin: 'bottom' });
+        sr.reveal('.contact-card', { interval: 150, origin: 'bottom' });
 
-        // Enhanced scroll animations with Intersection Observer
-        const observeElements = document.querySelectorAll('.skill-card, .project-card, .stats-card');
+        // Intersection Observer for animations
+        const observeElements = document.querySelectorAll('.skill-card, .project-card, .contact-card');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1166,64 +1749,30 @@
         });
 
         observeElements.forEach(el => {
-            el.style.transform = 'translateY(50px)';
+            el.style.transform = 'translateY(30px)';
             el.style.opacity = '0';
             el.style.transition = 'all 0.6s ease';
             observer.observe(el);
         });
 
-        // Enhanced smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroBackground = document.querySelector('.hero-background::before');
-            const rate = scrolled * -0.5;
-
-            if (scrolled < window.innerHeight) {
-                document.querySelector('.hero-background').style.transform = `translateY(${rate}px)`;
-            }
-        });
-
-        // Enhanced Console Easter Egg
+        // Console message
         console.log(`
-        🚀 Welcome to Aurelio Tech's ULTRA PROFESSIONAL Portfolio! 
+        🚀 Welcome to Aurelio Tech's ULTIMATE Portfolio!
 
-        ✨ Features a ONE-TIME logo animation that plays only on page load!
+        ✨ Features:
+        • 100% Mobile Optimized Design
+        • Dark/Light Theme Toggle
+        • One-time Logo Animation
+        • Professional Typography
+        • Responsive Grid Layouts
+        • Smooth Animations
+        • Perfect Accessibility
 
-        🎯 Logo Animation Details:
-        • Starts hidden (scale: 0.5, rotate: -180deg)
-        • Smooth entrance animation (2 seconds)
-        • Ends in perfect position (scale: 1, rotate: 0deg)
-        • No continuous spinning - professional and clean!
-        • Subtle hover effects for interactivity
+        📧 Contact: aureliocorporation7@gmail.com
+        🔗 GitHub: github.com/CodeWithHarry123
+        🎬 YouTube: @Aurelio_Tech-o4u
 
-        🔧 Advanced Technologies Implemented:
-        • Tailwind CSS with custom animations
-        • One-time CSS keyframe animations
-        • ScrollReveal & Typed.js libraries
-        • Intersection Observer API
-        • Responsive design principles
-        • Performance optimizations
-        • Modern web standards
-
-        📧 Ready to collaborate on amazing projects?
-        Contact: aureliocorporation7@gmail.com
-
-        ⭐ Professional portfolio with perfect logo animation timing!
-        🎯 Built for maximum impact and hiring success!
+        Built with passion and 20 years of experience! 💫
         `);
     </script>
 </body>
